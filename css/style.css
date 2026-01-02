@@ -1,0 +1,551 @@
+/* =========================
+   GLOBAL RESET & VARIABLES
+   ========================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg-main: radial-gradient(circle at top, #0b1025, #020617);
+
+  --text-main: #f8fafc;
+  --text-body: #e5e7eb;
+  --text-muted: #9ca3af;
+
+  --accent: #3b82f6;
+  --card-border: rgba(255, 255, 255, 0.08);
+  --code-bg: #040b2a;
+
+  --font-main: "Inter", system-ui, -apple-system, BlinkMacSystemFont,
+               "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* =========================
+   BASE (CRITICAL FOR EYES)
+   ========================= */
+html,
+body {
+  font-family: Space Grotesk, PT Sans, sans-serif;
+  background: var(--bg-main);
+  color: var(--text-body);
+
+  font-size: 19px;
+  line-height: 1.9;
+  letter-spacing: 0.01em;
+
+  min-height: 100vh;
+  overflow-anchor: none;
+}
+
+/* =========================
+   BLOG LIST PAGE (UPDATED)
+   ========================= */
+.blog-list {
+  max-width: 1300px; /* wider like reference */
+  margin: auto;
+  padding: 48px 24px;
+}
+
+.blog-card {
+  display: grid; /* 🔥 changed from flex */
+  grid-template-columns: 1.3fr 1fr; /* image left, text right */
+  gap: 44px;
+  padding: 32px;
+  border-radius: 22px;
+  border: 1px solid var(--card-border);
+ margin-bottom: 50px;
+  margin-top: 20px;
+  cursor: pointer;
+  align-items: center;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.blog-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+}
+
+/* Blog thumbnail */
+.blog-card img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 18px;
+  background: #020617;
+}
+
+/* Right content */
+.blog-info {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.blog-info small {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.blog-info h2 {
+  margin-top: 4px;
+  font-size: 2.4rem; /* larger like reference */
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.25;
+}
+
+/* Excerpt (auto-used if present) */
+.blog-info p {
+  font-size: 1.05rem;
+  color: var(--text-body);
+  line-height: 1.65;
+  max-width: 520px;
+}
+
+/* =========================
+   BLOG DETAIL PAGE
+   ========================= */
+.blog-content {
+  max-width: 900px;
+  margin: auto;
+  padding: 64px 28px 120px;
+}
+
+/* =========================
+   FIX: INLINE BADGES (SHIELDS)
+   ========================= */
+.blog-content img[src*="shields.io"] {
+  width: auto !important;
+  max-width: none !important;
+  height: auto !important;
+  aspect-ratio: auto !important;
+  margin: 6px 6px 6px 0 !important;
+  border-radius: 6px !important;
+  background: transparent !important;
+  display: inline-block;
+}
+
+
+/* =========================
+   TITLE & META
+   ========================= */
+.blog-title {
+  font-size: 3.1rem;
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+
+.blog-date {
+  color: var(--text-muted);
+  font-size: 1rem;
+  margin-bottom: 24px;
+}
+
+/* =========================
+   HERO IMAGE
+   ========================= */
+.blog-hero {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+  border-radius: 18px;
+  margin-bottom: 48px;
+  background: #020617;
+}
+
+/* =========================
+   CONTENT TYPOGRAPHY
+   ========================= */
+.blog-content p {
+  font-size: 1.1rem;
+  color: var(--text-body);
+  margin-bottom: 26px;
+}
+
+.blog-content h1,
+.blog-content h2,
+.blog-content h3 {
+  color: var(--text-main);
+  margin-top: 64px;
+  margin-bottom: 22px;
+  line-height: 1.3;
+}
+
+.blog-content h2 {
+  font-size: 2.1rem;
+}
+
+.blog-content h3 {
+  font-size: 1.7rem;
+}
+
+.blog-content ul {
+  margin-left: 28px;
+  margin-bottom: 28px;
+}
+
+.blog-content li {
+  margin-bottom: 12px;
+}
+
+/* =========================
+   BLOCKQUOTE
+   ========================= */
+.blog-content blockquote {
+  border-left: 4px solid var(--accent);
+  padding-left: 20px;
+  margin: 36px 0;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* =========================
+   HORIZONTAL RULE
+   ========================= */
+.blog-content hr {
+  border: none;
+  height: 1px;
+  background: rgba(255,255,255,0.35);
+  margin: 72px 0;
+}
+
+/* =========================
+   MEDIA
+   ========================= */
+.blog-content img,
+.blog-content video {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+  border-radius: 16px;
+  margin: 40px 0;
+  background: #020617;
+}
+
+/* =========================
+   CODE BLOCKS
+   ========================= */
+.blog-content pre {
+  background: var(--code-bg);
+  padding: 24px;
+  border-radius: 16px;
+  overflow-x: auto;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* =========================
+   RESPONSIVE BLOG LIST
+   ========================= */
+@media (max-width: 900px) {
+  .blog-card {
+    grid-template-columns: 1fr;
+  }
+
+  .blog-info h2 {
+    font-size: 2rem;
+  }
+}
+
+/* =========================
+   RESPONSIVE BASE
+   ========================= */
+@media (max-width: 768px) {
+  html,
+  body {
+    font-size: 18px;
+  }
+
+  .blog-content {
+    padding: 48px 16px 96px;
+  }
+
+  .blog-title {
+    font-size: 2.4rem;
+  }
+}
+
+/* =========================
+   HEADER
+   ========================= */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #040b2a;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.header-inner {
+  max-width: 1300px;
+  margin: auto;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: #f8fafc;
+  text-decoration: none;
+}
+
+.nav-links {
+  display: flex;
+  gap: 24px;
+}
+
+.nav-links a {
+  color: #cbd5e1;
+  text-decoration: none;
+}
+
+.nav-links a:hover {
+  color: white;
+}
+
+.btn-primary {
+  color: white;
+  padding: 10px 20px;
+  border-radius: 40px;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* =========================
+   MYOSA FOOTER
+   ========================= */
+.myosa-footer {
+  margin-top: 140px;
+  padding: 80px 24px 40px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+
+.footer-top {
+  max-width: 1300px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 48px;
+}
+
+.footer-col h3 {
+  color: #f8fafc;
+  margin-bottom: 16px;
+}
+
+.footer-col a {
+  color: #cbd5e1;
+  text-decoration: none;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.footer-col a:hover {
+  color: white;
+}
+
+.footer-bottom {
+  margin-top: 40px;
+  text-align: center;
+  color: #94a3b8;
+  font-size: 0.85rem;
+}
+
+.sponsor-logos img {
+  max-height: 56px;
+  max-width: 160px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  filter: brightness(0.95);
+}
+
+
+.footer-sponsors {
+  margin: 80px auto 40px;
+  max-width: 1300px;
+  background: #1e293b;
+  border-radius: 16px;
+  padding: 56px 64px;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 🔑 perfect symmetry */
+  gap: 80px;
+  align-items: center;
+}
+
+.sponsor-logos {
+  display: flex;
+  gap: 48px;
+  align-items: center;
+  justify-content: center; /* 🔑 center logos */
+  margin-top: 24px;
+}
+
+
+/* =========================
+   RESPONSIVE FOOTER
+   ========================= */
+@media (max-width: 768px) {
+  .footer-sponsors {
+    grid-template-columns: 1fr;
+    gap: 48px;
+    padding: 40px 24px;
+  }
+}
+/* =====================================================
+   IMAGE-1 EDITORIAL BLOG LIST PATCH (ADD ONLY)
+   ===================================================== */
+
+/* Remove card look – make it editorial */
+.blog-card {
+  border: none;
+  border-radius: 0;
+  padding: 56px 0;
+  margin-bottom: 0;
+  box-shadow: none;
+}
+
+/* Add subtle divider between blogs */
+.blog-card:not(:last-child) {
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+/* Disable hover lift/shadow (Image-1 style) */
+.blog-card:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+/* Stronger image dominance */
+.blog-card img {
+  border-radius: 16px;
+}
+
+/* Typography like Image-1 */
+.blog-info h2 {
+  font-size: 2.6rem;
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+/* Softer meta date */
+.blog-info small {
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
+}
+
+/* Limit text width for editorial feel */
+.blog-info {
+  max-width: 520px;
+}
+
+/* Mobile stays stacked (already correct, reinforced) */
+@media (max-width: 900px) {
+  .blog-card {
+    padding: 40px 0;
+  }
+
+  .blog-info h2 {
+    font-size: 2.1rem;
+  }
+}
+
+/* =========================
+   BLOG DATE (ICON STYLE)
+   ========================= */
+.blog-info small,
+.blog-date {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+}
+
+
+/* =========================
+   PAGINATION
+   ========================= */
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 96px 0 48px;
+}
+
+.pagination button {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.25);
+  color: #e5e7eb;
+  padding: 10px 16px;
+  font-size: 0.95rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.2s ease, border 0.2s ease;
+}
+
+.pagination button:hover:not(:disabled) {
+  background: rgba(255,255,255,0.08);
+}
+
+.pagination button.active {
+  border-color: #ffffff;
+  font-weight: 700;
+}
+
+.pagination button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.pagination span {
+  color: #9ca3af;
+  padding: 0 6px;
+  font-size: 0.95rem;
+}
+
+
+/* =========================
+   YOUTUBE EMBED
+   ========================= */
+.youtube-embed {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%; /* 16:9 */
+  margin: 40px 0;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #000;
+}
+
+.youtube-embed iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+
+.blog-search {
+  max-width: 600px;
+  margin: 30px auto;
+}
+
+.blog-search input {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
